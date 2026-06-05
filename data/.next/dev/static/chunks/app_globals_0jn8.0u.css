@@ -1,0 +1,29 @@
+/* [project]/app/globals.css [app-client] (css) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #e6edf3;
+  background: #0d1117;
+  font-family: Segoe UI, system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 2px;
+}
+
+/*# sourceMappingURL=app_globals_0jn8.0u.css.map*/

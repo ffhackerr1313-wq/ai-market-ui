@@ -1,0 +1,149 @@
+/* ─── Tailwind v4 ─────────────────────────────────────────────────────────── */
+@import "tailwindcss";
+
+/* Map shadcn-style tokens to JARVIS HUD palette so CardStack utilities work  */
+@theme {
+  --color-foreground:        #e6edf3;
+  --color-background:        #000308;
+  --color-muted-foreground:  rgb(139 148 158 / 0.75);
+  --color-secondary:         rgb(0 20 33 / 0.85);
+  --color-secondary-foreground: #e6edf3;
+}
+
+/* ─── Reset ───────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── HUD Design Tokens (Jarvis / Cantina palette) ───────────────────────── */
+:root {
+  /* Holographic spectrum */
+  --hud-cyan:        #00DFFB;   /* core hologram cyan   */
+  --hud-cyan-hot:    #52FEFE;   /* lifted glow value    */
+  --hud-electric:    #0098F8;   /* deep electric blue   */
+  --hud-jarvis-blue: #51A4DE;   /* holographic material */
+  --hud-white:       #FFFFFF;
+
+  /* Background spectrum */
+  --bg-void:         #000308;   /* page base            */
+  --bg-navy:         #001421;   /* deep panel bg        */
+  --bg-steel:        #222931;   /* secondary panel      */
+  --bg-fog:          #384C50;   /* tertiary surface     */
+
+  /* Functional accents */
+  --warn-amber:      #FF6B00;   /* alerts / warning     */
+  --warn-gold:       #FBCA03;   /* soft warning         */
+  --danger-red:      #AA0505;   /* critical / neg P&L   */
+  --success-green:   #00FF9F;   /* fills / pos P&L      */
+
+  /* Glass surfaces */
+  --glass-tint:      rgba(0, 223, 251, 0.05);
+  --glass-border:    rgba(82, 254, 254, 0.15);
+  --glass-glow:      0 0 40px rgba(0, 223, 251, 0.12);
+
+  /* Typography variables */
+  --font-display: 'Orbitron', sans-serif;
+  --font-ui:      'Rajdhani', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+}
+
+/* ─── Body ────────────────────────────────────────────────────────────────── */
+body {
+  background: var(--bg-void);
+  color: #e6edf3;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar          { width: 4px; height: 4px; }
+::-webkit-scrollbar-track    { background: transparent; }
+::-webkit-scrollbar-thumb    { background: rgba(0,223,251,0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,223,251,0.4); }
+
+/* ─── Liquid Glass panel base ─────────────────────────────────────────────── */
+.glass-panel {
+  position: relative;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 223, 251, 0.05),
+    rgba(0, 152, 248, 0.02)
+  );
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-glow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  isolation: isolate;
+}
+
+.glass-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    108deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+/* ─── HUD corner brackets ─────────────────────────────────────────────────── */
+.hud-corner {
+  position: fixed;
+  width: 56px;
+  height: 56px;
+  z-index: 900;
+  pointer-events: none;
+}
+.hud-corner::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--hud-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--hud-cyan), 0 0 20px rgba(0, 223, 251, 0.35);
+}
+.hud-corner.tl { top:20px;    left:20px;    border-top:2px solid var(--hud-cyan); border-left:2px solid var(--hud-cyan); }
+.hud-corner.tr { top:20px;    right:20px;   border-top:2px solid var(--hud-cyan); border-right:2px solid var(--hud-cyan); }
+.hud-corner.bl { bottom:20px; left:20px;    border-bottom:2px solid var(--hud-cyan); border-left:2px solid var(--hud-cyan); }
+.hud-corner.br { bottom:20px; right:20px;   border-bottom:2px solid var(--hud-cyan); border-right:2px solid var(--hud-cyan); }
+.hud-corner.tl::after { bottom:-3px; right:-3px; }
+.hud-corner.tr::after { bottom:-3px; left:-3px; }
+.hud-corner.bl::after { top:-3px;    right:-3px; }
+.hud-corner.br::after { top:-3px;    left:-3px; }
+
+/* ─── Typography utilities ────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-ui      { font-family: var(--font-ui); }
+.font-mono    { font-family: var(--font-mono); }
+
+.hud-text {
+  font-family: var(--font-display);
+  color: var(--hud-cyan);
+  text-shadow: 0 0 20px rgba(0, 223, 251, 0.5);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ─── Signal color utilities ─────────────────────────────────────────────── */
+.signal-buy  { color: var(--success-green); }
+.signal-sell { color: var(--danger-red); }
+.signal-hold { color: var(--warn-amber); }
+
+/* ─── Reduced-motion safety net ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

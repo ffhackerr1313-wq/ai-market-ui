@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/atul/ai-market-ui/app/globals.css"],"sourcesContent":["* {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\nbody {\n  background: #0d1117;\n  color: #e6edf3;\n  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;\n  font-size: 13px;\n}\n\n::-webkit-scrollbar { width: 4px; height: 4px; }\n::-webkit-scrollbar-track { background: transparent; }\n::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;;;;AAOA;;;;;AACA;;;;AACA"}}]
+}
