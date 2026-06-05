@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3000/\" -UseBasicParsing -TimeoutSec 60; \"HTTP $\\($r.StatusCode\\) — $\\($r.RawContentLength\\) bytes\" } catch { \"REQUEST FAILED: $\\($_.Exception.Message\\)\" })"
-    ]
-  }
-}

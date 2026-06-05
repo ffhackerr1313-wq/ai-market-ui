@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# Claude Code config — local only
+.claude/
+.claude.json
+
 # dev logs
 *.log
 dev_err.txt
