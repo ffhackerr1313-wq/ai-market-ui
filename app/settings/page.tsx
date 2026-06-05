@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect } from "react";
 import PageShell from "@/components/PageShell";
 
@@ -202,7 +202,7 @@ export default function SettingsPage() {
           color: saved ? C.buy : C.accent,
           transition: "all 0.2s",
         }}>
-          {saved ? "âœ“ Saved!" : "Save Settings"}
+          {saved ? "Saved!" : "Save Settings"}
         </button>
       </div>
 
@@ -420,7 +420,7 @@ export default function SettingsPage() {
               color: testResult === "ok" ? C.buy : testResult === "fail" ? C.sell : C.accent,
               transition: "all 0.2s",
             }}>
-              {testResult === "sending" ? "Sending..." : testResult === "ok" ? "âœ“ Sent!" : testResult === "fail" ? "âœ— Failed — check config.py" : "Send Test Message"}
+              {testResult === "sending" ? "Sending..." : testResult === "ok" ? "Sent!" : testResult === "fail" ? "Failed — check config.py" : "Send Test Message"}
             </button>
           </SettingRow>
 

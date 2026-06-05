@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import PageShell from "@/components/PageShell";
 
@@ -11,7 +11,7 @@ const C = {
 const API     = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 const TICKERS = ["RELIANCE.NS","TCS.NS","HDFCBANK.NS","INFY.NS","ICICIBANK.NS"];
 
-// â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ Types â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 type Trade    = { date:string; type:string; price:number; pnl:number };
 type CurvePt  = { date:string; value:number; price:number };
@@ -43,7 +43,7 @@ type WFResult = {
   error?:string;
 };
 
-// â”€â”€â”€ Shared helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ Shared helpers â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 const cs: React.CSSProperties = {
   background:C.card, border:`1px solid ${C.border}`, borderRadius:10, padding:16,
@@ -74,7 +74,7 @@ function Spinner({msg}:{msg:string}) {
   );
 }
 
-// â”€â”€â”€ Simple backtest charts â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ Simple backtest charts â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 function EquityCurve({data,width,height}:{data:CurvePt[];width:number;height:number}) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -145,7 +145,7 @@ function MonthlyHeatmap({data}:{data:MonthRet[]}) {
   );
 }
 
-// â”€â”€â”€ Walk-Forward accuracy bar chart â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ Walk-Forward accuracy bar chart â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 function WFBarChart({windows,width,height}:{windows:WFWindow[];width:number;height:number}) {
   const ref=useRef<HTMLCanvasElement>(null);
@@ -195,7 +195,7 @@ function WFBarChart({windows,width,height}:{windows:WFWindow[];width:number;heig
   return <canvas ref={ref} style={{width,height,display:"block"}}/>;
 }
 
-// â”€â”€â”€ Walk-Forward tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ Walk-Forward tab â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 function WalkForwardTab({ticker}:{ticker:string}) {
   const [result,setResult]=useState<WFResult|null>(null);
@@ -326,7 +326,7 @@ function WalkForwardTab({ticker}:{ticker:string}) {
                         background:w.beat_bh?"rgba(16,185,129,0.1)":"rgba(239,68,68,0.08)",
                         color:w.beat_bh?C.buy:C.sell,
                         border:`1px solid ${w.beat_bh?C.buy:C.sell}33`,
-                      }}>{w.beat_bh?"âœ“ YES":"âœ— NO"}</span>
+                      }}>{w.beat_bh?"YES":"NO"}</span>
                     </td>
                     <td style={{padding:"9px 10px",color:C.muted}}>{w.n_signals}</td>
                   </tr>
@@ -381,7 +381,7 @@ function WalkForwardTab({ticker}:{ticker:string}) {
   );
 }
 
-// â”€â”€â”€ Main page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ Main page â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 export default function BacktestPage() {
   const [ticker,  setTicker]  = useState("RELIANCE.NS");
@@ -550,7 +550,7 @@ export default function BacktestPage() {
                           <span style={{color:t.type==="BUY"?C.buy:C.sell,fontWeight:600}}>{t.type}</span>
                           <span style={{textAlign:"right"}}>₹{t.price}</span>
                           <span style={{textAlign:"right",color:t.pnl>0?C.buy:t.pnl<0?C.sell:C.muted,fontWeight:t.pnl!==0?600:400}}>
-                            {t.pnl!==0?(t.pnl>0?”+”:—)+”₹”+Math.round(t.pnl):”—“}
+                            {t.pnl!==0?(t.pnl>0?"+":"-")+"₹"+Math.round(t.pnl):"—"}
                           </span>
                         </div>
                       ))}
@@ -565,16 +565,16 @@ export default function BacktestPage() {
                     <div>
                       <div style={{fontWeight:600,marginBottom:8,color:C.accent}}>What worked</div>
                       <div style={{color:C.muted,lineHeight:1.7}}>
-                        {result.win_rate>=50?"âœ“ Win rate above 50%":"âœ— Win rate below 50%"}<br/>
-                        {result.profit_factor>=1?"âœ“ Profit factor ≥ 1":"âœ— Profit factor < 1 — losses dominate"}<br/>
-                        {result.sharpe>=0.5?"âœ“ Positive Sharpe ratio":"âœ— Low Sharpe — needs better risk mgmt"}
+                        {result.win_rate>=50?"Win rate above 50%":"Win rate below 50%"}<br/>
+                        {result.profit_factor>=1?"Profit factor >= 1":"Profit factor < 1 — losses dominate"}<br/>
+                        {result.sharpe>=0.5?"Positive Sharpe ratio":"Low Sharpe — needs better risk mgmt"}
                       </div>
                     </div>
                     <div>
                       <div style={{fontWeight:600,marginBottom:8,color:C.hold}}>Key metrics</div>
                       <div style={{color:C.muted,lineHeight:1.7}}>
                         Strategy: {result.total_return>=0?"+":""}{result.total_return}% vs Market: {result.buy_hold_return>=0?"+":""}{result.buy_hold_return}%<br/>
-                        Beat market: {result.total_return>result.buy_hold_return?"YES âœ“":"NO âœ—"}<br/>
+                        Beat market: {result.total_return>result.buy_hold_return?"YES":"NO"}<br/>
                         Max drawdown: {result.max_drawdown}%<br/>
                         Trades: {result.total_trades}
                       </div>

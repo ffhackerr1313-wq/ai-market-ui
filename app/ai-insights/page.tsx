@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 import { useState, useEffect, useRef } from "react";
 import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
 import PageShell from "@/components/PageShell";
 
-/* â”€â”€ Extended card type carries the NSE ticker for live signal lookup â”€â”€ */
+/* â"€â"€ Extended card type carries the NSE ticker for live signal lookup â"€â"€ */
 type SpotlightCard = CardStackItem & { ticker: string };
 
 const MARKET_SPOTLIGHT: SpotlightCard[] = [
@@ -59,7 +59,7 @@ const MARKET_SPOTLIGHT: SpotlightCard[] = [
   },
 ];
 
-/* â”€â”€ HUD-native card renderer â”€â”€ */
+/* â"€â"€ HUD-native card renderer â"€â"€ */
 const HUD = {
   cyan: "#00DFFB", hot: "#52FEFE", green: "#00FF9F",
   red: "#ef4444", amber: "#FF6B00", void: "#000308",
@@ -87,7 +87,7 @@ function HUDSpotlightCard({
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: 16, overflow: "hidden" }}>
 
-      {/* â”€â”€ Base image â”€â”€ */}
+      {/* â"€â"€ Base image â"€â"€ */}
       <img
         src={item.imageSrc}
         alt={item.title}
@@ -95,7 +95,7 @@ function HUDSpotlightCard({
         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
       />
 
-      {/* â”€â”€ Dark HUD blend layers â”€â”€ */}
+      {/* â"€â"€ Dark HUD blend layers â"€â"€ */}
       {/* primary dark wash */}
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,rgba(0,3,8,.88) 0%,rgba(0,15,28,.72) 55%,rgba(0,3,8,.92) 100%)" }} />
       {/* cyan radial bloom bottom-left */}
@@ -115,7 +115,7 @@ function HUDSpotlightCard({
         backgroundSize: "100% 3px",
       }} />
 
-      {/* â”€â”€ Active border glow â”€â”€ */}
+      {/* â"€â"€ Active border glow â"€â"€ */}
       {active && (
         <div style={{
           position: "absolute", inset: 0, borderRadius: 16, pointerEvents: "none",
@@ -124,7 +124,7 @@ function HUDSpotlightCard({
         }} />
       )}
 
-      {/* â”€â”€ HUD corner brackets â”€â”€ */}
+      {/* â"€â"€ HUD corner brackets â"€â"€ */}
       {(["tl","tr","bl","br"] as const).map(pos => {
         const t = pos.startsWith("t"), l = pos.endsWith("l");
         return (
@@ -143,7 +143,7 @@ function HUDSpotlightCard({
         );
       })}
 
-      {/* â”€â”€ Content â”€â”€ */}
+      {/* â"€â"€ Content â"€â"€ */}
       <div style={{ position: "absolute", inset: 0, padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
 
         {/* Top row: sector tag + signal badge */}
@@ -385,7 +385,7 @@ export default function AIInsightsPage() {
         </div>
       </div>
 
-      {/* â”€â”€ MARKET SPOTLIGHT â”€â”€ */}
+      {/* â"€â"€ MARKET SPOTLIGHT â"€â"€ */}
       <div style={{
         padding: "24px 32px 8px",
         borderBottom: `1px solid rgba(82,254,254,.1)`,

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect } from "react";
 import PageShell from "@/components/PageShell";
 
@@ -58,7 +58,7 @@ type StrategyData = {
 type FilterType = "ALL" | "BUY" | "SELL" | "HOLD";
 
 const INR = (v: number | null) =>
-  v == null ? “—“ : “₹” + v.toLocaleString(“en-IN”, { maximumFractionDigits: 2 });
+  v == null ? "—" : "₹" + v.toLocaleString("en-IN", { maximumFractionDigits: 2 });
 
 const pct = (price: number | null, ref: number | null) => {
   if (!price || !ref) return "";
@@ -172,7 +172,7 @@ function ConfluencePanel({ data }: { data: ConfluenceData | null }) {
               <div style={{ display: "flex", gap: 6, flex: 1, flexWrap: "wrap" }}>
                 {b.above_ma50 !== undefined && (
                   <span style={{ fontSize: 9, padding: "2px 6px", borderRadius: 3, background: b.above_ma50 ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)", color: b.above_ma50 ? C.buy : C.sell }}>
-                    {b.above_ma50 ? "â†‘MA50" : "â†“MA50"}
+                    {b.above_ma50 ? "+MA50" : "-MA50"}
                   </span>
                 )}
                 {b.rsi !== undefined && (
@@ -235,7 +235,7 @@ function TradePlan({ s }: { s: Signal }) {
           <span style={{ color: C.muted }}>Risk / Reward</span>
           <span style={{ fontWeight: 700, color: s.risk_reward >= 2 ? C.buy : s.risk_reward >= 1 ? C.hold : C.sell }}>
             1 : {s.risk_reward.toFixed(1)}
-            {s.risk_reward >= 2 ? " âœ“ Good" : s.risk_reward >= 1 ? " ↓ OK" : " âœ— Poor"}
+            {s.risk_reward >= 2 ? " Good R:R" : s.risk_reward >= 1 ? " OK R:R" : " Poor R:R"}
           </span>
         </div>
         {s.kelly_half_pct > 0 && (
@@ -265,7 +265,7 @@ function TradePlan({ s }: { s: Signal }) {
   );
 }
 
-// â”€â”€ Strategy Selector â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Strategy Selector â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 function StrategySelector({
   strategyData, switching, onSwitch,
@@ -319,7 +319,7 @@ function StrategySelector({
                 display: "flex", alignItems: "center", gap: 6,
               }}
             >
-              {isActive && <span style={{ fontSize: 10 }}>âœ“</span>}
+              {isActive && <span style={{ fontSize: 10 }}>âœ"</span>}
               {s.name}
               <span style={{ fontSize: 9, padding: "1px 5px", borderRadius: 3,
                 background: `${tfColor}18`, color: tfColor, fontWeight: 600 }}>
@@ -345,7 +345,7 @@ function StrategySelector({
             <span style={{ color: TF_COLOR[meta.timeframe] || C.muted, fontWeight: 700 }}>{meta.timeframe} bars</span>
           </div>
           <div style={{ fontSize: 10, color: C.muted, maxWidth: 240, lineHeight: 1.5 }}>
-            ðŸ’¡ {meta.why_better}
+            ðŸ'¡ {meta.why_better}
           </div>
         </div>
       </div>
@@ -354,7 +354,7 @@ function StrategySelector({
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// â”€â”€ MAIN PAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ MAIN PAGE â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 export default function SignalsPage() {
@@ -533,7 +533,7 @@ export default function SignalsPage() {
                         <div>
                           <div style={{ fontSize: 15, fontWeight: 700 }}>{s.symbol.replace(".NS", "")}</div>
                           <div style={{ fontSize: 10, color: C.muted, marginTop: 1 }}>
-                            {ticker ? `${ticker.price} ${ticker.change > 0 ? “▲” : “▼”} ${Math.abs(ticker.change)}%` : “—“}
+                            {ticker ? `${ticker.price} ${ticker.change > 0 ? "▲" : "▼"} ${Math.abs(ticker.change)}%` : "—"}
                           </div>
                         </div>
                         <Badge type={s.signal} />

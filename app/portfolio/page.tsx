@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import PageShell from "@/components/PageShell";
 
@@ -38,7 +38,7 @@ const label: React.CSSProperties = {
 const INR = (v: number) =>
   "₹" + v.toLocaleString("en-IN", { maximumFractionDigits: 0 });
 
-// â”€â”€ Modal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Modal â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 type ModalProps = {
   initial?: Partial<Position>;
@@ -114,7 +114,7 @@ function PositionModal({ initial, onSave, onClose }: ModalProps) {
   );
 }
 
-// â”€â”€ Mini spark â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Mini spark â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 function Spark({ positive }: { positive: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -139,7 +139,7 @@ function Spark({ positive }: { positive: boolean }) {
   return <canvas ref={ref} style={{ width: 80, height: 24, display: "block" }} />;
 }
 
-// â”€â”€ Main page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€ Main page â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 export default function PortfolioPage() {
   const [positions, setPositions] = useState<Position[]>([]);
@@ -221,7 +221,7 @@ export default function PortfolioPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
             {[
               { lbl: "Invested", val: INR(totalInvested), sub: `${positions.length} position${positions.length !== 1 ? "s" : ""}`, color: C.accent },
-              { lbl: "Current Value", val: INR(totalValue), sub: totalValue >= totalInvested ? "â†‘ portfolio up" : "â†“ portfolio down", color: totalValue >= totalInvested ? C.buy : C.sell },
+              { lbl: "Current Value", val: INR(totalValue), sub: totalValue >= totalInvested ? "portfolio up" : "portfolio down", color: totalValue >= totalInvested ? C.buy : C.sell },
               { lbl: "Total P&L", val: `${totalPnl >= 0 ? "+" : ""}${INR(totalPnl)}`, sub: `${totalPnlPct >= 0 ? "+" : ""}${totalPnlPct.toFixed(2)}%`, color: totalPnl >= 0 ? C.buy : C.sell },
               { lbl: "Winners", val: `${winners}/${positions.length}`, sub: positions.length ? `${((winners / positions.length) * 100).toFixed(0)}% win rate` : "no positions", color: C.buy },
             ].map(m => (
@@ -244,7 +244,7 @@ export default function PortfolioPage() {
 
             {positions.length === 0 ? (
               <div style={{ textAlign: "center", padding: "40px 0", color: C.muted }}>
-                <div style={{ fontSize: 32, marginBottom: 12 }}>ðŸ“‹</div>
+                <div style={{ fontSize: 32, marginBottom: 12 }}>ðŸ"‹</div>
                 <div style={{ fontSize: 14, marginBottom: 6 }}>No positions yet</div>
                 <div style={{ fontSize: 12, marginBottom: 20 }}>Add your first position to start tracking P&L</div>
                 <button onClick={() => setModal({ open: true })} style={{ padding: "10px 24px", background: C.accent, border: "none", borderRadius: 6, color: "#000", fontWeight: 700, cursor: "pointer" }}>+ Add Position</button>

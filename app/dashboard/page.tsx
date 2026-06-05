@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import TiltCard from "@/components/TiltCard";
 
 const HoloScene = dynamic(() => import("@/components/HoloScene"), { ssr: false });
 
-// â”€â”€â”€ Tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ Tokens â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 const H = {
   cyan:"#00DFFB", hot:"#52FEFE", electric:"#0098F8",
   void:"#000308", green:"#00FF9F", red:"#ef4444", amber:"#FF6B00",
@@ -56,7 +56,7 @@ function getSuggestions(q: string, universe: {symbol:string;name:string;sector:s
 const sigColor = (s?:string) => s==="BUY"?H.green:s==="SELL"?H.red:H.amber;
 const fmt = (n:number) => n.toLocaleString("en-IN",{maximumFractionDigits:0});
 
-// â”€â”€â”€ CSS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ CSS â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -91,7 +91,7 @@ body{background:#000308;overflow:hidden;}
   text-transform:uppercase;padding:5px 13px;border-radius:5px;cursor:pointer;transition:all .2s ease;}
 `;
 
-// â”€â”€â”€ UI Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ UI Helpers â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 function Spin() {
   return (
     <div style={{display:"flex",alignItems:"center",justifyContent:"center",padding:24}}>
@@ -124,7 +124,7 @@ function Bar({value,color=H.cyan}:{value:number;color?:string}) {
 }
 
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-// â”€â”€â”€ MAIN PAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â"€â"€â"€ MAIN PAGE â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 export default function Dashboard() {
   const pathname = usePathname();
@@ -425,7 +425,7 @@ export default function Dashboard() {
                             color:H.cyan,letterSpacing:"0.04em",whiteSpace:"nowrap",overflow:"hidden",
                             textOverflow:"ellipsis"}}>{w.symbol.replace(".NS","")}</div>
                           <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:8,color:"rgba(82,254,254,.3)"}}>
-                            {w.price!=null?`₹${w.price}`:”—“}
+                            {w.price!=null?`₹${w.price}`:"—"}
                           </div>
                         </div>
                         <div style={{display:"flex",alignItems:"center",gap:5,flexShrink:0}}>
@@ -789,7 +789,7 @@ export default function Dashboard() {
                 })}
                 <div style={{padding:"5px 16px 7px",fontFamily:"'Share Tech Mono',monospace",fontSize:7,
                   color:"rgba(82,254,254,.25)",letterSpacing:".12em"}}>
-                  â†‘â†“ NAVIGATE · TAB COMPLETE · ENTER OR CLICK TO ANALYSE
+                  â†'â†" NAVIGATE · TAB COMPLETE · ENTER OR CLICK TO ANALYSE
                 </div>
               </div>
             )}
@@ -857,7 +857,7 @@ export default function Dashboard() {
                         className="tbtn" style={{flex:1,padding:9,
                         border:`1px solid ${inWatch?"rgba(239,68,68,.3)":"rgba(0,255,159,.3)"}`,
                         background:inWatch?"rgba(239,68,68,.08)":"rgba(0,255,159,.08)",
-                        color:inWatch?H.red:H.green}}>{inWatch?"âœ“ REMOVE":"+ ADD TO WATCHLIST"}</button>
+                        color:inWatch?H.red:H.green}}>{inWatch?"REMOVE":"+ ADD TO WATCHLIST"}</button>
                     </div>
                   </div>
                 );

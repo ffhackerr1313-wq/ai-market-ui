@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -17,7 +17,7 @@ type MarketStatus = { status: string; is_open: boolean; trade_date?: string; err
 import { motion } from "framer-motion";
 import { ScrollTiltedGrid, DEFAULT_GRID_IMAGES } from "@/components/ui/scroll-tilted-grid";
 
-/* â”€â”€â”€ 12 original philosophical trading quotes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ 12 original philosophical trading quotes â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 const QUOTES = [
   {
     text: "The market does not punish ambition. It punishes impatience.",
@@ -69,7 +69,7 @@ const QUOTES = [
   },
 ] as const;
 
-/* â”€â”€â”€ Token colours â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ Token colours â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 const T = {
   void:  "#000308",
   cyan:  "#00DFFB",
@@ -78,7 +78,7 @@ const T = {
   muted: "rgba(82,254,254,0.35)",
 };
 
-/* â”€â”€â”€ Quote overlay rendered inside each tile on click â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ Quote overlay rendered inside each tile on click â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 function QuoteOverlay({ quote }: { quote: typeof QUOTES[number] }) {
   return (
     <div
@@ -162,7 +162,7 @@ function QuoteOverlay({ quote }: { quote: typeof QUOTES[number] }) {
   );
 }
 
-/* â”€â”€â”€ Animated scan line for hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ Animated scan line for hero â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 const scanAnim = `
 @keyframes hero-scan {
   0%   { top: 0%;   opacity: 0.5; }
@@ -179,7 +179,7 @@ const scanAnim = `
 }
 `;
 
-/* â”€â”€â”€ NSE Live Market Panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ NSE Live Market Panel â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 type WsStatus = "connecting" | "connected" | "disconnected";
 
 function NSEPanel() {
@@ -253,8 +253,8 @@ function NSEPanel() {
     };
   }, []);
 
-  const fmt = (v: number | null, prefix = “₹”) =>
-    v == null ? “—“ : prefix + v.toLocaleString(“en-IN”, { maximumFractionDigits: 2 });
+  const fmt = (v: number | null, prefix = "₹") =>
+    v == null ? "—" : prefix + v.toLocaleString("en-IN", { maximumFractionDigits: 2 });
   const fmtVol = (v: number | null) =>
     v == null ? "—" : v >= 1e7 ? (v / 1e7).toFixed(2) + " Cr" : v >= 1e5 ? (v / 1e5).toFixed(1) + " L" : v.toLocaleString();
 
@@ -342,7 +342,7 @@ function NSEPanel() {
                       </div>
                       {!q.error && (
                         <div style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 10, color, marginTop: 2, letterSpacing: "0.05em" }}>
-                          {up ? “▲” : “▼”} {fmt(q.change, “”)} ({q.pct_change != null ? Math.abs(q.pct_change).toFixed(2) : “—“}%)
+                          {up ? "▲" : "▼"} {fmt(q.change, "")} ({q.pct_change != null ? Math.abs(q.pct_change).toFixed(2) : "—"}%)
                         </div>
                       )}
                       {q.error && <div style={{ fontSize: 8, color: "#ef4444", fontFamily: "'Share Tech Mono',monospace" }}>NSE error</div>}
@@ -437,7 +437,7 @@ function NSEPanel() {
   );
 }
 
-/* â”€â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* â"€â"€â"€ Page â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ */
 export default function QuotesPage() {
   return (
     <PageShell>
