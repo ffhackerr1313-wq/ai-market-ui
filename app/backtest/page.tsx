@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import PageShell from "@/components/PageShell";
 
@@ -241,7 +241,7 @@ function WalkForwardTab({ticker}:{ticker:string}) {
 
   if(!result||result.error) return (
     <div style={{margin:24,padding:16,background:"rgba(239,68,68,0.1)",border:`1px solid rgba(239,68,68,0.3)`,borderRadius:8,color:C.sell}}>
-      âš  {result?.error||"Unknown error"} — ensure API is running at localhost:8000
+      âš  {result?.error||"Unknown error"} — API connection failed
     </div>
   );
 
@@ -464,7 +464,7 @@ export default function BacktestPage() {
             {loading&&<Spinner msg={`Running backtest for ${ticker}…`}/>}
             {error&&(
               <div style={{margin:"0 0 16px",padding:16,background:"rgba(239,68,68,0.08)",border:`1px solid rgba(239,68,68,0.25)`,borderRadius:8,color:C.sell,fontFamily:"'Rajdhani',sans-serif"}}>
-                âš  {error} — Make sure the API is running at localhost:8000
+                âš  {error} — API connection failed
               </div>
             )}
             {result&&!loading&&(

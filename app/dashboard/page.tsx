@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useState, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -217,7 +217,7 @@ export default function Dashboard() {
       const d=await r.json();
       if(d.error) setSearchErr(typeof d.error==="string"?d.error:"No data found");
       else setSearchHit(d);
-    }catch{ setSearchErr("Search failed — is the API running on :8000?"); }
+    }catch{ setSearchErr("Search failed — API connection error"); }
     setSearchBusy(false);
   };
 
@@ -709,7 +709,7 @@ export default function Dashboard() {
               <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:8,
                 color:"rgba(82,254,254,.2)",letterSpacing:"0.1em"}}>LSTM · ACTIVE</span>
               <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:8,
-                color:"rgba(82,254,254,.2)",letterSpacing:"0.1em"}}>:8000</span>
+                color:"rgba(82,254,254,.2)",letterSpacing:"0.1em"}}>JARVIS API</span>
               <div style={{display:"flex",alignItems:"center",gap:4}}>
                 <div style={{width:4,height:4,borderRadius:"50%",background:H.green,
                   boxShadow:`0 0 6px ${H.green}`,animation:"blink 2s ease-in-out infinite"}}/>
