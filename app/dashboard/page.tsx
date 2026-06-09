@@ -89,6 +89,38 @@ body{background:#000308;overflow:hidden;}
 .nav-a.on{color:#00DFFB;background:rgba(0,223,251,.08);border-left-color:#00DFFB;}
 .tbtn{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;
   text-transform:uppercase;padding:5px 13px;border-radius:5px;cursor:pointer;transition:all .2s ease;}
+
+/* ── Mobile responsive ───────────────────────────────────────────────────── */
+.mob-menu-btn{display:none;align-items:center;justify-content:center;width:36px;height:36px;
+  cursor:pointer;padding:0;background:rgba(0,223,251,.06);border:1px solid rgba(82,254,254,.18);border-radius:7px;flex-shrink:0;}
+.hdr-tickers{display:flex;gap:4px;}
+.idx-pills{display:flex;align-items:center;gap:12px;}
+.port-clock{display:flex;align-items:center;gap:12px;}
+.sidebar-nav{width:208px;flex-shrink:0;border-right:1px solid rgba(82,254,254,.08);
+  background:rgba(0,3,8,.55);backdrop-filter:blur(12px);display:flex;flex-direction:column;
+  padding:12px 0;overflow-y:auto;}
+.main-cols{flex:1;overflow:auto;padding:12px 14px;display:grid;gap:10px;
+  grid-template-columns:280px 1fr 250px;align-content:start;}
+.mob-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:150;
+  opacity:0;pointer-events:none;transition:opacity .28s;}
+.mob-overlay.vis{opacity:1;pointer-events:auto;}
+.mob-bottom{display:none;position:fixed;bottom:0;left:0;right:0;height:56px;
+  border-top:1px solid rgba(82,254,254,.1);background:rgba(0,3,8,.95);
+  backdrop-filter:blur(16px);z-index:100;align-items:center;justify-content:space-around;}
+
+@media(max-width:768px){
+  .mob-menu-btn{display:flex!important;}
+  .sidebar-nav{position:fixed;left:0;top:0;bottom:56px;z-index:200;
+    transform:translateX(-100%);width:240px;transition:transform .28s ease;}
+  .sidebar-nav.open{transform:translateX(0);box-shadow:4px 0 50px rgba(0,0,0,.85);}
+  .main-cols{grid-template-columns:1fr!important;padding:8px 8px 68px!important;}
+  .idx-pills{display:none!important;}
+  .port-clock{display:none!important;}
+  .hdr-tickers{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:calc(100vw - 90px);}
+  .hdr-tickers::-webkit-scrollbar{display:none;}
+  .hdr-tickers button{flex-shrink:0;}
+  .mob-bottom{display:flex!important;}
+}
 `;
 
 // â"€â"€â"€ UI Helpers â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
@@ -138,7 +170,8 @@ export default function Dashboard() {
   const [marketOpen, setMarketOpen] = useState<boolean|null>(null);
   const [showChart,  setShowChart]  = useState(true);
   const [watch,      setWatch]      = useState<WatchItem[]>([]);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchOpen,  setSearchOpen]  = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchQ,    setSearchQ]    = useState("");
   const [searchHit,  setSearchHit]  = useState<SearchHit|null>(null);
   const [searchBusy, setSearchBusy] = useState(false);
@@ -284,7 +317,14 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div style={{display:"flex",gap:4}}>
+            <button className="mob-menu-btn" onClick={()=>setSidebarOpen(o=>!o)} title="Menu">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect y="2" width="16" height="2" rx="1" fill="#00DFFB"/>
+                <rect y="7" width="16" height="2" rx="1" fill="#00DFFB"/>
+                <rect y="12" width="16" height="2" rx="1" fill="#00DFFB"/>
+              </svg>
+            </button>
+            <div className="hdr-tickers" style={{display:"flex",gap:4}}>
               {TICKERS.map(t=>{
                 const s=signals.find(x=>x.symbol===t);
                 const c=sigColor(s?.signal);
@@ -301,81 +341,86 @@ export default function Dashboard() {
             </div>
 
             <div style={{display:"flex",alignItems:"center",gap:12}}>
-              {/* Live index pills */}
-              {nifty50 && (
-                <div style={{display:"flex",alignItems:"center",gap:6,padding:"3px 10px",borderRadius:5,
-                  background:"rgba(0,223,251,.05)",border:"1px solid rgba(82,254,254,.12)"}}>
-                  <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
-                    color:"rgba(82,254,254,.4)",letterSpacing:"0.1em"}}>N50</span>
-                  <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:10,color:H.text}}>
-                    {fmtIdx(nifty50.last)}
-                  </span>
-                  <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:9,
-                    color:pctColor(nifty50.pct_change)}}>
-                    {nifty50.pct_change>=0?"+":""}{nifty50.pct_change?.toFixed(2)}%
-                  </span>
-                </div>
-              )}
-              {bankNifty && (
-                <div style={{display:"flex",alignItems:"center",gap:6,padding:"3px 10px",borderRadius:5,
-                  background:"rgba(0,223,251,.05)",border:"1px solid rgba(82,254,254,.12)"}}>
-                  <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
-                    color:"rgba(82,254,254,.4)",letterSpacing:"0.1em"}}>BNK</span>
-                  <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:10,color:H.text}}>
-                    {fmtIdx(bankNifty.last)}
-                  </span>
-                  <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:9,
-                    color:pctColor(bankNifty.pct_change)}}>
-                    {bankNifty.pct_change>=0?"+":""}{bankNifty.pct_change?.toFixed(2)}%
-                  </span>
-                </div>
-              )}
-              {/* Market status */}
-              {marketOpen !== null && (
-                <div style={{display:"flex",alignItems:"center",gap:5,padding:"3px 10px",borderRadius:5,
-                  background:marketOpen?"rgba(0,255,159,.05)":"rgba(239,68,68,.05)",
-                  border:`1px solid ${marketOpen?"rgba(0,255,159,.15)":"rgba(239,68,68,.15)"}`}}>
-                  <div style={{width:5,height:5,borderRadius:"50%",
-                    background:marketOpen?H.green:H.red,
-                    boxShadow:`0 0 6px ${marketOpen?H.green:H.red}`,
-                    animation:"blink 2s ease-in-out infinite"}}/>
-                  <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,letterSpacing:"0.1em",
-                    color:marketOpen?"rgba(0,255,159,.7)":"rgba(239,68,68,.6)"}}>
-                    {marketOpen?"OPEN":"CLOSED"}
-                  </span>
-                </div>
-              )}
+              {/* Index pills — hidden on mobile */}
+              <div className="idx-pills" style={{display:"flex",alignItems:"center",gap:12}}>
+                {nifty50 && (
+                  <div style={{display:"flex",alignItems:"center",gap:6,padding:"3px 10px",borderRadius:5,
+                    background:"rgba(0,223,251,.05)",border:"1px solid rgba(82,254,254,.12)"}}>
+                    <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
+                      color:"rgba(82,254,254,.4)",letterSpacing:"0.1em"}}>N50</span>
+                    <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:10,color:H.text}}>
+                      {fmtIdx(nifty50.last)}
+                    </span>
+                    <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:9,
+                      color:pctColor(nifty50.pct_change)}}>
+                      {nifty50.pct_change>=0?"+":""}{nifty50.pct_change?.toFixed(2)}%
+                    </span>
+                  </div>
+                )}
+                {bankNifty && (
+                  <div style={{display:"flex",alignItems:"center",gap:6,padding:"3px 10px",borderRadius:5,
+                    background:"rgba(0,223,251,.05)",border:"1px solid rgba(82,254,254,.12)"}}>
+                    <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
+                      color:"rgba(82,254,254,.4)",letterSpacing:"0.1em"}}>BNK</span>
+                    <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:10,color:H.text}}>
+                      {fmtIdx(bankNifty.last)}
+                    </span>
+                    <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:9,
+                      color:pctColor(bankNifty.pct_change)}}>
+                      {bankNifty.pct_change>=0?"+":""}{bankNifty.pct_change?.toFixed(2)}%
+                    </span>
+                  </div>
+                )}
+                {marketOpen !== null && (
+                  <div style={{display:"flex",alignItems:"center",gap:5,padding:"3px 10px",borderRadius:5,
+                    background:marketOpen?"rgba(0,255,159,.05)":"rgba(239,68,68,.05)",
+                    border:`1px solid ${marketOpen?"rgba(0,255,159,.15)":"rgba(239,68,68,.15)"}`}}>
+                    <div style={{width:5,height:5,borderRadius:"50%",
+                      background:marketOpen?H.green:H.red,
+                      boxShadow:`0 0 6px ${marketOpen?H.green:H.red}`,
+                      animation:"blink 2s ease-in-out infinite"}}/>
+                    <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,letterSpacing:"0.1em",
+                      color:marketOpen?"rgba(0,255,159,.7)":"rgba(239,68,68,.6)"}}>
+                      {marketOpen?"OPEN":"CLOSED"}
+                    </span>
+                  </div>
+                )}
+              </div>
               <button onClick={()=>setSearchOpen(true)} title="Search stocks (Ctrl+K)" style={{
                 display:"flex",alignItems:"center",gap:8,padding:"5px 11px",borderRadius:7,cursor:"pointer",
                 background:"rgba(0,223,251,.06)",border:"1px solid rgba(82,254,254,.18)",
                 fontFamily:"'Rajdhani',sans-serif",fontSize:11,fontWeight:600,letterSpacing:".08em",
                 color:"rgba(82,254,254,.65)",textTransform:"uppercase"}}>
-                <span style={{fontSize:13}}>âŒ•</span> Search
+                <span style={{fontSize:13}}>⌕</span> Search
                 <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:8,padding:"1px 5px",borderRadius:3,
                   background:"rgba(82,254,254,.1)",color:"rgba(82,254,254,.5)"}}>Ctrl K</span>
               </button>
-              <div style={{textAlign:"right"}}>
-                <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:12,fontWeight:700,
-                  color:H.green,textShadow:`0 0 12px rgba(0,255,159,.4)`}}>₹{fmt(portTotal)}</div>
-                <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
-                  color:"rgba(82,254,254,.3)",letterSpacing:"0.15em"}}>PORTFOLIO</div>
-              </div>
-              <div style={{textAlign:"right"}}>
-                <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:13,
-                  color:"#00DFFB",letterSpacing:"0.05em"}}>{timeStr}</div>
-                <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
-                  color:"rgba(82,254,254,.3)",letterSpacing:"0.15em"}}>IST</div>
+              {/* Portfolio + clock — hidden on mobile */}
+              <div className="port-clock" style={{display:"flex",alignItems:"center",gap:12}}>
+                <div style={{textAlign:"right"}}>
+                  <div style={{fontFamily:"'Orbitron',sans-serif",fontSize:12,fontWeight:700,
+                    color:H.green,textShadow:`0 0 12px rgba(0,255,159,.4)`}}>₹{fmt(portTotal)}</div>
+                  <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
+                    color:"rgba(82,254,254,.3)",letterSpacing:"0.15em"}}>PORTFOLIO</div>
+                </div>
+                <div style={{textAlign:"right"}}>
+                  <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:13,
+                    color:"#00DFFB",letterSpacing:"0.05em"}}>{timeStr}</div>
+                  <div style={{fontFamily:"'Share Tech Mono',monospace",fontSize:7,
+                    color:"rgba(82,254,254,.3)",letterSpacing:"0.15em"}}>IST</div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* BODY */}
-          <div style={{flex:1,display:"flex",overflow:"hidden"}}>
+          <div style={{flex:1,display:"flex",overflow:"hidden",position:"relative"}}>
+
+            {/* Mobile overlay — dismisses sidebar */}
+            <div className={`mob-overlay${sidebarOpen?" vis":""}`} onClick={()=>setSidebarOpen(false)}/>
 
             {/* SIDEBAR */}
-            <div style={{width:208,flexShrink:0,borderRight:"1px solid rgba(82,254,254,.08)",
-              background:"rgba(0,3,8,.55)",backdropFilter:"blur(12px)",
-              display:"flex",flexDirection:"column",padding:"12px 0"}}>
+            <div className={`sidebar-nav${sidebarOpen?" open":""}`}>
               {[
                 {l:"Overview",   h:"/",            i:"â¬¡"},
                 {l:"Dashboard",  h:"/dashboard",   i:"â—‰"},
@@ -452,8 +497,7 @@ export default function Dashboard() {
             </div>
 
             {/* MAIN GRID */}
-            <div style={{flex:1,overflow:"auto",padding:"12px 14px",display:"grid",gap:10,
-              gridTemplateColumns:"280px 1fr 250px",alignContent:"start"}}>
+            <div className="main-cols">
 
               {/* COL 1 */}
               <div style={{display:"flex",flexDirection:"column",gap:10}}>
@@ -720,6 +764,28 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      {/* MOBILE BOTTOM NAV */}
+      <nav className="mob-bottom">
+        {[
+          {l:"Dashboard", h:"/dashboard", i:"◉"},
+          {l:"Signals",   h:"/signals",   i:"◎"},
+          {l:"Portfolio", h:"/portfolio", i:"◈"},
+          {l:"Backtest",  h:"/backtest",  i:"◆"},
+          {l:"Settings",  h:"/settings",  i:"⚙"},
+        ].map(n=>{
+          const active=pathname===n.h;
+          return(
+            <Link key={n.l} href={n.h} onClick={()=>setSidebarOpen(false)} style={{
+              display:"flex",flexDirection:"column",alignItems:"center",gap:2,textDecoration:"none",
+              fontFamily:"'Rajdhani',sans-serif",fontSize:8,fontWeight:700,letterSpacing:".08em",
+              textTransform:"uppercase",color:active?"#00DFFB":"rgba(82,254,254,.3)"}}>
+              <span style={{fontSize:18,opacity:active?1:.45}}>{n.i}</span>
+              {n.l}
+            </Link>
+          );
+        })}
+      </nav>
 
       {/* SEARCH MODAL */}
       {searchOpen&&(
